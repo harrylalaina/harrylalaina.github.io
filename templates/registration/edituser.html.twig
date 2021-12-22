@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Register' %}
+
+{% block body %}
+	<div class="container">
+		<div class="row g-3">
+			<div class="col-md-5 col-lg-4 order-md-first"></div>
+			<div class="col-md-5 col-lg-4 order-md">
+				<div class="py-5 text-center">
+					<h1>
+						Editer un user
+					</h1>
+				</div>
+				<div class="mt-1s">
+					{{ form_start(registrationForm) }}
+					{{ form_row(registrationForm.firstName, {'attr': {'placeholder':'Saisir votre nom'}}) }}
+					{{ form_row(registrationForm.lastName, {'attr': {'placeholder':'Votre prénom'}}) }}
+					{{ form_row(registrationForm.email, {'attr': {'placeholder':'Par ex : example@mail.com'}}) }}
+					{{ form_row(registrationForm.roles) }}
+					<div class="d-grid gap-2">
+						<input type="submit" value="Update user" class="btn btn-primary" formnovalidate>
+					</div>
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

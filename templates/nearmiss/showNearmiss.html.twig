@@ -1,0 +1,139 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Near miss #' ~ nearmiss.id %}
+
+{% block body %}
+	<div class="app-card app-card-notification shadow-sm mb-4 mt-5">
+		<div class="app-card-header px-4 py-3">
+			<div class="row g-3 align-items-center">
+				<div class="col-12 col-lg-auto text-center text-lg-start">
+					<img class="profile-image" src="{{ asset('img/user1.png') }}" alt="user_profile">
+				</div>
+				<!--//col-->
+				<div class="col-12 col-lg-auto text-center text-lg-start">
+					{% if nearmiss.niveau.typeNiveau == "Niveau 1" %}
+						<div class="notification-type mb-2">
+							<span class="badge bg-info">{{ nearmiss.niveau.typeNiveau }}</span>
+						</div>
+					{% elseif nearmiss.niveau.typeNiveau == "Niveau 2"   %}
+						<div class="notification-type mb-2">
+							<span class="badge bg-warning">{{ nearmiss.niveau.typeNiveau }}</span>
+						</div>
+						{% if nearmiss.status.typeStatus == "non traité" %}
+							<p class="text-muted">validated</p>
+						{% endif %}
+					{% elseif nearmiss.niveau.typeNiveau == "Niveau 3" %}
+						<div class="notification-type mb-2">
+							<span class="badge bg-danger">{{ nearmiss.niveau.typeNiveau }}</span>
+						</div>
+						{% if nearmiss.status.typestatus == 'non traité' %}
+							<p class="text-muted">validated</p>
+						{% endif %}
+					{% endif %}
+					<h4 class="notification-title mb-1">{{ nearmiss.titre }}</h4>
+
+					<ul class="notification-meta list-inline mb-0">
+						<li class="list-inline-item">{{ nearmiss.createdAt | ago }}</li>
+						<li class="list-inline-item">|</li>
+						<li class="list-inline-item">{{ nearmiss.employe.name }}</li>
+					</ul>
+
+				</div>
+				<!--//col-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//app-card-header-->
+		<div class="app-card-body p-4">
+			<div class="notification-content">
+				<p>
+					<h6>Description de l'incident :</h6>
+					{{ nearmiss.description }}
+				</p>
+				<hr>
+				<p>
+					<h6>Action immediate prise pour controler le risque :</h6>
+					{{ nearmiss.actionImmediate }}
+				</p>
+				<hr>
+				<p>
+					<h6>Action de prévention :</h6>
+					{% if nearmiss.actionPrevention == null %}
+						<i>
+							<p class="text-muted">Pas d'action de prévention pour cet incident</p>
+						</i>
+					{% else %}
+						<i>
+							{{ nearmiss.actionPrevention }}
+						</i>
+					{% endif %}
+				</p>
+				<hr>
+				<p>
+					<h6>Niveau de risque :</h6>
+					{% if nearmiss.niveauRisque == "Faible" %}
+						<span class="badge bg-success">
+							{{ nearmiss.niveauRisque }}
+						</span>
+					{% elseif nearmiss.niveauRisque == "Significatif" %}
+						<span class="badge bg-info">
+							{{ nearmiss.niveauRisque }}
+						</span>
+					{% elseif nearmiss.niveauRisque == "Elevé" %}
+						<span class="badge bg-warning">
+							{{ nearmiss.niveauRisque }}
+						</span>
+					{% elseif nearmiss.niveauRisque == "Inacceptable" %}
+						<span class="badge bg-danger">
+							{{ nearmiss.niveauRisque }}
+						</span>
+					{% endif %}
+				</p>
+				<p>
+					<h6>Statut :</h6>
+					{% if nearmiss.status.typeStatus=='non traité' %}
+						<span class="badge bg-warning">{{ nearmiss.status.typeStatus }}</span>
+					{% elseif nearmiss.status.typeStatus=='canceled' %}
+						<span class="badge bg-danger">{{ nearmiss.status.typeStatus }}</span>
+						<p class="text-muted">Délais expiré</p>
+					{% elseif nearmiss.status.typeStatus=='en attente' %}
+						<span class="badge bg-info">{{ nearmiss.status.typeStatus }}</span>
+						<p class="text-muted">En attente de validation</p>
+					{% else %}
+						<span class="badge bg-success">
+							{{ nearmiss.status.typeStatus }}
+						</span>
+						<p class="text-muted">Traité par
+							{% for item in traitement %}
+								{% if item.nearmiss.id == nearmiss.id %}
+									{{ item.user.firstName }}
+									{{ item.user.lastName }}
+									({{ item.user.email }})
+								{% endif %}
+							{% endfor %}
+						</p>
+					{% endif %}
+				</p>
+			</div>
+		</div>
+		<!--//app-card-body-->
+		<div class="app-card-footer px-4 py-3">
+			{% if app.user %}
+				{% if nearmiss.status.typeStatus=='non traité' %}
+					<a href="{{ path('app_nearmiss_traitement', {id: nearmiss.id}) }}" class="btn btn-success">Traiter</a>
+				{% endif %}
+				{% for item in app.user.roles %}
+					{% if item == "ROLE_ADMIN" %}
+						{% if nearmiss.status.typeStatus == "en attente" %}
+							<a href="{{ path('app_nearmiss_validation', {id: nearmiss.id}) }}" onclick="confirm('Sur ve ianao??');" class="btn btn-success">Valider</a>
+						{% endif %}
+						<a href="{{ path('app_nearmiss_edit', {id: nearmiss.id}) }}" class="btn btn-primary">Edit</a>
+						<a href="{{ path('app_nearmiss_delete', {id: nearmiss.id}) }}" onclick="confirm('Sur ve ianao??');" class="btn btn-danger">Delete</a>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+		<!--//app-card-footer-->
+	</div>
+	<!--//app-card-->
+{% endblock %}

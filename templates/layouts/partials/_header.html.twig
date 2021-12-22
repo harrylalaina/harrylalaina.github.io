@@ -1,0 +1,265 @@
+<header class="app-header fixed-top">
+	<div class="app-header-inner">
+		<div class="container-fluid py-2">
+			<div class="app-header-content">
+				<div class="row justify-content-between align-items-center">
+
+					<div class="col-auto">
+						<a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewbox="0 0 30 30" role="img">
+								<title>DASHBOARD</title>
+								<path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+							</svg>
+						</a>
+					</div>
+
+					<div class="app-utilities col-auto">
+						<div class="app-utility-item app-notifications-dropdown dropdown">
+							<a class="navbar-brand" href="{{ path('app_home') }}">NEAR MISS</a>
+							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<a
+								class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
+									<path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+								</svg>
+								<span class="icon-badge">3</span>
+							</a>
+
+						</div>
+
+						<div class="app-utility-item app-user-dropdown dropdown">
+							<a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="{{ asset('img/user1.png') }}" alt="user profile"></a>
+							<ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+								<li>
+									<a class="dropdown-item" href="#">Account</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Settings</a>
+								</li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>
+								</li>
+							</ul>
+						</div>
+						<!--//app-user-dropdown-->
+					</div>
+					<!--//app-utilities-->
+				</div>
+				<!--//row-->
+			</div>
+			<!--//app-header-content-->
+		</div>
+		<!--//container-fluid-->
+	</div>
+	<!--//app-header-inner-->
+	<div id="app-sidepanel" class="app-sidepanel">
+		<div id="sidepanel-drop" class="sidepanel-drop"></div>
+		<div class="sidepanel-inner d-flex flex-column">
+			<a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+			<div class="app-branding">
+				<a class="app-logo" href="#">
+					<img src="{{ asset('img/I_own_safety.png') }}" width="200" height="90" alt="logo">
+				</a>
+
+			</div>
+			<!--//app-branding-->
+
+			<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+				<ul class="app-menu list-unstyled accordion" id="menu-accordion">
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('admin_control') }}">
+							<span class="nav-icon">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+									<path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+								</svg>
+							</span>
+							<span class="nav-link-text">Vue d'ensemble</span>
+						</a>
+						<!--//nav-link-->
+					</li>
+					<!--//nav-item-->
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('user_user_list') }}">
+							<span class="nav-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewbox="0 0 16 16">
+									<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+								</svg>
+							</span>
+							<span class="nav-link-text">User</span>
+						</a>
+						<!--//nav-link-->
+					</li>
+					<!--//nav-item-->
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('admin_employe_list') }}">
+							<span class="nav-icon">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-card-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+									<path fill-rule="evenodd" d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+									<circle cx="3.5" cy="5.5" r=".5"/>
+									<circle cx="3.5" cy="8" r=".5"/>
+									<circle cx="3.5" cy="10.5" r=".5"/>
+								</svg>
+							</span>
+							<span class="nav-link-text">Employé</span>
+						</a>
+						<!--//nav-link-->
+					</li>
+					<!--//nav-item-->
+					<li class="nav-item has-submenu">
+						<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
+							<span class="nav-icon">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+									<path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+								</svg>
+							</span>
+							<span class="nav-link-text">Near miss</span>
+							<span class="submenu-arrow">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+								</svg>
+							</span>
+							<!--//submenu-arrow-->
+						</a>
+						<!--//nav-link-->
+						<div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
+							<ul class="submenu-list list-unstyled">
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_nearmiss_list') }}">Traitement</a>
+								</li>
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_nearmiss_suivi') }}">Suivi</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<!--//nav-item-->
+					<li class="nav-item has-submenu">
+						<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
+							<span class="nav-icon">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"/>
+								</svg>
+							</span>
+							<span class="nav-link-text">Service</span>
+							<span class="submenu-arrow">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+								</svg>
+							</span>
+							<!--//submenu-arrow-->
+						</a>
+						<!--//nav-link-->
+						<div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
+							<ul class="submenu-list list-unstyled">
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_nearmiss_administration') }}">Administration</a>
+								</li>
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_nearmiss_magasin') }}">Magasin</a>
+								</li>
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_nearmiss_maintenance') }}">Maintenance</a>
+								</li>
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_nearmiss_ohse') }}">OHSE</a>
+								</li>
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_nearmiss_production') }}">Production</a>
+								</li>
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_nearmiss_qualite') }}">Qualité</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<!--//nav-item-->
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<span class="nav-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewbox="0 0 16 16">
+									<path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
+									<path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
+									<path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+								</svg>
+							</span>
+							<span class="nav-link-text">Stats</span>
+						</a>
+						<!--//nav-link-->
+					</li>
+					<!--//nav-item-->
+					<li class="nav-item has-submenu">
+						<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-3">
+							<span class="nav-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewbox="0 0 16 16">
+									<path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
+									<path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
+									<path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+								</svg>
+							</span>
+							<span class="nav-link-text">Historique</span>
+							<span class="submenu-arrow">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+								</svg>
+							</span>
+							<!--//submenu-arrow-->
+						</a>
+						<!--//nav-link-->
+						<div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
+							<ul class="submenu-list list-unstyled">
+								<li class="submenu-item">
+									<a class="submenu-link" href="#">Semaine dernière</a>
+								</li>
+								<li class="submenu-item">
+									<a class="submenu-link" href="#">Mois dernier</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<!--//nav-item-->
+				</ul>
+				<!--//app-menu-->
+			</nav>
+			<!--//app-nav-->
+			<div class="app-sidepanel-footer">
+				<nav class="app-nav app-nav-footer">
+					<ul
+						class="app-menu footer-menu list-unstyled">
+
+						<!--//nav-item-->
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">
+								<span class="nav-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plug" viewbox="0 0 16 16">
+										<path d="M6 0a.5.5 0 0 1 .5.5V3h3V.5a.5.5 0 0 1 1 0V3h1a.5.5 0 0 1 .5.5v3A3.5 3.5 0 0 1 8.5 10c-.002.434-.01.845-.04 1.22-.041.514-.126 1.003-.317 1.424a2.083 2.083 0 0 1-.97 1.028C6.725 13.9 6.169 14 5.5 14c-.998 0-1.61.33-1.974.718A1.922 1.922 0 0 0 3 16H2c0-.616.232-1.367.797-1.968C3.374 13.42 4.261 13 5.5 13c.581 0 .962-.088 1.218-.219.241-.123.4-.3.514-.55.121-.266.193-.621.23-1.09.027-.34.035-.718.037-1.141A3.5 3.5 0 0 1 4 6.5v-3a.5.5 0 0 1 .5-.5h1V.5A.5.5 0 0 1 6 0zM5 4v2.5A2.5 2.5 0 0 0 7.5 9h1A2.5 2.5 0 0 0 11 6.5V4H5z"/>
+									</svg>
+								</span>
+								<span class="nav-link-text">Add new User</span>
+							</a>
+							<!--//nav-link-->
+						</li>
+						<!--//nav-item-->
+					</ul>
+
+					<!--//nav-item-->
+				</ul>
+				<!--//footer-menu-->
+			</nav>
+		</div>
+		<!--//app-sidepanel-footer-->
+
+	</div>
+	<!--//sidepanel-inner-->
+	<!--//app-sidepanel-->
+</header>
+<!--//app-header-->

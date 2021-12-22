@@ -1,0 +1,34 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Validation</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-12 col-md-11 col-lg-7 col-xl-6 mx-auto">
+					<div class="app-card p-5 text-center shadow-sm mt-5">
+						<img src="{{ asset('img/403_error_page.png') }}" width="546" height="400" alt="logo">
+						<a class="btn app-btn-primary mt-4" href="{{ path('app_home') }}">Go to home page</a>
+					</div>
+				</div>
+				<!--//col-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//container-->
+		<footer class="app-auth-footer">
+			<div class="container text-center py-3">
+				{{ include('layouts/partials/_footer.html.twig') }}
+			</div>
+		</footer>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "admin/dashboard.html.twig" %}
+
+{% block title 'Année' %}
+
+{% block body %}
+	<div class="row g-4 mb-4">
+		<div class="col-12 col-lg-6">
+			<div class="app-card app-card-chart h-100 shadow-sm">
+				{{ form_start(formYear) }}
+				{{ form_row(formYear.debut) }}
+			</div>
+		</div>
+		<div class="col-12 col-lg-6">
+			<div class="app-card app-card-chart h-100 shadow-sm">
+				{{ form_row(formYear.fin) }}
+				<input type="submit" value="Ajouter" class="btn btn-primary">
+				{{ form_end(formYear) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

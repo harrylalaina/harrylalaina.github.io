@@ -1,0 +1,14 @@
+<nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4 mt-5">
+	<a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-hebdo" role="tab" aria-controls="orders-all" aria-selected="true">Hebdomadaire</a>
+	<a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-mensuel" role="tab" aria-controls="orders-pending" aria-selected="false">Mensuel</a>
+	<a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-tous" role="tab" aria-controls="orders-pending" aria-selected="false">Tous</a>
+</nav>
+
+
+<div class="tab-content" id="orders-table-tab-content">
+	{{ include('nearmiss/hebdomadaire/hebdo.html.twig') }}
+
+	{{ include('nearmiss/mensuel/mensuel.html.twig') }}
+
+	{{ include('nearmiss/annuel/annuel.html.twig') }}
+</div>

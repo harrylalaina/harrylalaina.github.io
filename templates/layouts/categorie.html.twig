@@ -1,0 +1,32 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block title 'Liste des catégories' %}
+
+{% block body %}
+	<h2 class="text text-center mt-4">
+		Liste des catégories :
+		{{ categorie|length }}
+		catégories</h2>
+	<div class="p-5">
+		<table class="table table-responsive">
+			<th>Icon</th>
+			<th>Designation</th>
+			<th>Definition</th>
+			{% for item in categorie %}
+				<tr>
+					<td>
+						<img src=" {{ vich_uploader_asset( item ) | imagine_filter('square_thumbnail_extra_small') }} " alt=" {{ item.imageName  }} ">
+					</td>
+					<td>{{ item.designation }}</td>
+					<td>{{ item.definition }}</td>
+					{% if app.user %}
+						<td>
+							<a href="{{ path('admin_categorie_edit', {id: item.id}) }}" class="btn btn-primary">Edit</a>
+						</td>
+					{% endif %}
+
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

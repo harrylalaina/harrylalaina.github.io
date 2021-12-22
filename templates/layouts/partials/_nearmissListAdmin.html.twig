@@ -1,0 +1,75 @@
+{% set count1 = 0 %}
+
+{% for item in nearmiss %}
+	{% if item.status.typeStatus == "traité" %}
+		{% set count1 = count1 + 1 %}
+	{% endif %}
+{% endfor %}
+
+{% set count2 = 0 %}
+
+{% for item in nearmiss %}
+	{% if item.status.typeStatus == "non traité" %}
+		{% set count2 = count2 + 1 %}
+	{% endif %}
+{% endfor %}
+
+{% set count3 = 0 %}
+
+{% for item in nearmiss %}
+	{% if item.status.typeStatus == "canceled" %}
+		{% set count3 = count3 + 1 %}
+	{% endif %}
+{% endfor %}
+
+{% set count4 = 0 %}
+
+{% for item in nearmiss %}
+	{% if item.status.typeStatus == "en attente" %}
+		{% set count4 = count4 + 1 %}
+	{% endif %}
+{% endfor %}
+
+
+<nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4 mt-5">
+	<a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">
+		Tous
+	</a>
+	<a class="flex-sm-fill text-sm-center nav-link" id="orders-paid-tab" data-bs-toggle="tab" href="#orders-traite" role="tab" aria-controls="orders-paid" aria-selected="false">
+		Traité
+		<span class="badge bg-danger">
+			{{ count1 }}
+		</span>
+	</a>
+	<a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-nontraite" role="tab" aria-controls="orders-pending" aria-selected="false">
+		Non traité
+		<span class="badge bg-danger">
+			{{ count2 }}
+		</span>
+	</a>
+	<a class="flex-sm-fill text-sm-center nav-link" id="orders-canceled-tab" data-bs-toggle="tab" href="#orders-canceled" role="tab" aria-controls="orders-pending" aria-selected="false">
+		Canceled
+		<span class="badge bg-danger">
+			{{ count3 }}
+		</span>
+	</a>
+	<a class="flex-sm-fill text-sm-center nav-link" id="orders-attente-tab" data-bs-toggle="tab" href="#orders-attente" role="tab" aria-controls="orders-pending" aria-selected="false">
+		En attente
+		<span class="badge bg-danger">
+			{{ count4 }}
+		</span>
+	</a>
+</nav>
+
+
+<div class="tab-content" id="orders-table-tab-content">
+	{{ include('nearmiss/tous/tous.html.twig') }}
+
+	{{ include('nearmiss/traite/traite.html.twig') }}
+
+	{{ include('nearmiss/non_traite/non_traite.html.twig') }}
+
+	{{ include('nearmiss/canceled/canceled.html.twig') }}
+
+	{{ include('nearmiss/en_attente/attente.html.twig') }}
+</div>

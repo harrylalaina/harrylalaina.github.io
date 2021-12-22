@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>
+			{% block title 'Tableau de bord ADMIN' %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+	<body class="app">
+		{{ include('layouts/partials/_header.html.twig') }}
+		<div class="app-wrapper">
+
+			<div class="app-content pt-3 p-md-3 p-lg-4">
+				<div class="container-xl"></div>
+				{% block body %}{% endblock %}
+				<!--//container-fluid-->
+			</div>
+			<!--//app-content-->
+
+		</div>
+		{{ include('layouts/partials/_footer.html.twig') }}
+		<!--//app-wrapper-->
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('chartjs') }}
+			{{ encore_entry_script_tags('responsive') }}
+		{% endblock %}
+
+	</body>
+
+</html>

@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Editer une catégorie de near miss' %}
+
+{% block body %}
+	<div class="row ">
+		<div class="py-5 text-center mt-2">
+			<h2>EDIT CATEGORIE</h2>
+		</div>
+		{{ form_start(formCategorie) }}
+		<div>
+			{{ form_row(formCategorie.imageFile) }}
+			{{ form_row(formCategorie.designation) }}
+			{{ form_row(formCategorie.definition) }}
+		</div>
+		<div class="d-grid gap-2">
+			<input type="submit" value="Update catégorie" class="btn btn-primary">
+		</div>
+		{{ form_end(formCategorie) }}
+
+	</div>
+{% endblock %}

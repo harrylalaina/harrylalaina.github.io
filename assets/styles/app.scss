@@ -1,0 +1,28 @@
+@import "~bootstrap/scss/bootstrap";
+@import "portal";
+
+
+.alert {
+    padding: 10px;
+    color: white;
+    text-align: center;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+
+    &.alert-success {
+        background: green;
+    }
+    &.alert-error {
+        background: red;
+    }
+    &.alert-info {
+        background: blue;
+    }
+}
+
+.vich-image img{
+    @extend .rounded;
+    @extend .shadow;
+    @extend .img-thumbnail
+}

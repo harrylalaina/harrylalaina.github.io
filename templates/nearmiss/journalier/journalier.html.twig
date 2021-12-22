@@ -1,0 +1,95 @@
+<div class="tab-pane fade show active" id="orders-journalier" role="tabpanel" aria-labelledby="orders-jour-tab">
+	{% set count = 0 %}
+	<h1 class="text text-center mt-4 mb-4">
+		{% for item in nearmiss %}
+			{% if item.createdAt|date('j') == 'now'|date('j') and item.createdAt|date('F') == 'now'|date('F')   and  item.createdAt|date('Y') == 'now'|date('Y')  %}
+				{% set count = count + 1 %}
+			{% endif %}
+		{% endfor %}
+		{{ count }}
+		Near miss(es)
+	</h1>
+	<div class="app-card app-card-orders-table shadow-sm mb-5">
+		<div class="app-card-body">
+			<div class="table-responsive">
+				<table class="table app-table-hover mb-0 text-left">
+					<thead>
+						<tr>
+							<th class="cell">Cat</th>
+							<th class="cell">Titre</th>
+							<th class="cell">Description</th>
+							<th class="cell">Risque</th>
+							<th class="cell">Date</th>
+							<th class="cell">Auteur</th>
+							<th class="cell">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in nearmiss %}
+							{% if item.createdAt|date('j') == 'now'|date('j') and item.createdAt|date('F') == 'now'|date('F')   and  item.createdAt|date('Y') == 'now'|date('Y')  %}
+								<tr>
+									<td>{{ item.categorie.designation | u.truncate(3,' ', false) }}</td>
+									<td>
+										{{ item.titre | u.truncate(25,'...', false) }}
+										{% if item.niveau.typeNiveau == "Niveau 1" %}
+											<span class="badge bg-info">{{ item.niveau.typeNiveau }}</span>
+										{% elseif item.niveau.typeNiveau == "Niveau 2" %}
+											<span class="badge bg-warning">{{ item.niveau.typeNiveau }}</span>
+										{% elseif item.niveau.typeNiveau == "Niveau 3" %}
+											<span class="badge bg-danger">{{ item.niveau.typeNiveau }}</span>
+										{% endif %}
+									</td>
+									<td>{{ item.description | u.truncate(10,'...', false) }}</td>
+									<td>
+										{% if item.niveauRisque == "Faible" %}
+											<span class="badge bg-success">
+												{{ item.niveauRisque }}
+											</span>
+										{% elseif item.niveauRisque == "Significatif" %}
+											<span class="badge bg-info">
+												{{ item.niveauRisque }}
+											</span>
+										{% elseif item.niveauRisque == "Elevé" %}
+											<span class="badge bg-warning">
+												{{ item.niveauRisque }}
+											</span>
+										{% elseif item.niveauRisque == "Inacceptable" %}
+											<span class="badge bg-danger">
+												{{ item.niveauRisque }}
+											</span>
+										{% endif %}
+									</td>
+									<td>{{ item.createdAt|date('j F Y H:i') }}</td>
+									<td>{{ item.employe.name }}</td>
+									<td>
+										{% if item.status.typeStatus=='non traité' %}
+											<span class="badge bg-warning">{{ item.status.typeStatus }}</span>
+										{% else %}
+											<span class="badge bg-success">{{ item.status.typeStatus }}</span>
+										{% endif %}
+									</td>
+									<td>
+										<a href="{{ path('app_nearmiss_show', {id: item.id}) }}" class="btn btn-primary">
+											<i class="fa fa-clipboard"></i>
+										</a>
+										{% if item.status.typeStatus=='non traité' %}
+											{% if app.user %}
+												<a href="{{ path('app_nearmiss_traitement', {id: item.id}) }}" class="btn btn-success">
+													<i class="fa fa-check"></i>
+												</a>
+											{% endif %}
+										{% endif %}
+									</td>
+								</tr>
+							{% endif %}
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<!--//table-responsive-->
+		</div>
+		<!--//app-card-body-->
+	</div>
+	<!--//app-card-->
+</div>
+<!--//tab-pane-->

@@ -1,0 +1,83 @@
+<header>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Eighth navbar example">
+		<div class="container">
+			<a class="navbar-brand" href="{{ path('app_home') }}">NEAR MISS</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			{% if app.user %}
+				<a class="navbar-brand" href="{{ path('admin_control') }}">Dashboard</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			{% endif %}
+
+			<div class="collapse navbar-collapse" id="navbarsExample07">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_nearmiss_create') }}">Ajouter</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_traitement') }}">Traitement</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<font style="vertical-align: inherit;">
+								<font style="vertical-align: inherit;">Service</font>
+							</font>
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="{{ path('app_nearmiss_administration') }}">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">Administration</font>
+								</font>
+							</a>
+							<a class="dropdown-item" href="{{ path('app_nearmiss_magasin') }}">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">Magasin</font>
+								</font>
+							</a>
+							<a class="dropdown-item" href="{{ path('app_nearmiss_maintenance') }}">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">Maintenance</font>
+								</font>
+							</a>
+							<a class="dropdown-item" href="{{ path('app_nearmiss_ohse') }}">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">OHSE</font>
+								</font>
+							</a>
+							<a class="dropdown-item" href="{{ path('app_nearmiss_production') }}">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">Production</font>
+								</font>
+							</a>
+							<a class="dropdown-item" href="{{ path('app_nearmiss_qualite') }}">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">Qualité</font>
+								</font>
+							</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">About</a>
+					</li>
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('user_account') }}">Account</a>
+						</li>
+						<li class="nav-item">
+							<a class="btn btn-secondary" href="{{ path('app_logout') }}">
+								<i class="fa fa-power-off"></i>
+							</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="btn btn-secondary" href="{{ path('app_login') }}">Login</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>

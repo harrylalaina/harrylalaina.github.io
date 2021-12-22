@@ -1,0 +1,75 @@
+<div class="row g-3">
+	<div class="col-md-1 col-lg-2 order-md-first"></div>
+	<div class="col-md-5 col-lg-8">
+		<div class="row g-3">
+			{{ form_start(formNearmiss) }}
+			<div class="row g-3">
+				<div class="col-sm-4">
+					{{ form_row(formNearmiss.employe.name) }}
+				</div>
+				<div class="col-sm-4">
+					{{ form_row(formNearmiss.employe.service) }}
+				</div>
+				<div class="col-sm-4">
+					{{ form_row(formNearmiss.employe.nomResponsable) }}
+				</div>
+			</div>
+			<div class="">
+				{{ form_row(formNearmiss.niveau) }}
+				{{ form_row(formNearmiss.titre, {'attr': {'placeholder':'Le titre de votre near miss'}}) }}
+				{{ form_row(formNearmiss.description, {'attr': {'placeholder':"Qu'est-ce-qui s'est passé/Qu'est-ce-qui aurait pu se passer/Comment/Pourquoi?"}}) }}
+				{{ form_row(formNearmiss.action_immediate, {'attr': {'placeholder':'Action immédiate prise pour contrôler le(s) risque(s)/Traitement/Correction'}}) }}
+				{{ form_row(formNearmiss.action_prevention, {'attr':{'placeholder':"Action prise afin d'éviter qu'un near miss similaire ne se reproduise"}}) }}
+				{{ form_row(formNearmiss.niveau_risque) }}
+				<table>
+					<tr>
+						<td>
+							{{ form_row(formNearmiss.categorie) }}
+						</td>
+						<td>
+							<a class="btn btn-secondary mt-3" href="{{ path('app_categorie_show') }}">
+								<i class="fa fa-info"></i>
+							</a>
+						</td>
+					</tr>
+				</table>
+				{{ form_row(formNearmiss.tache_affecte) }}
+				{{ form_row(formNearmiss.support, {'attr':{'placeholder':'Besoin du support de ... '}}) }}
+			</div>
+			<br>
+			<hr>
+			<br>
+			<div class="row g-4">
+				<div class="col sm-8">
+					{{ form_row(formNearmiss.action_possible) }}
+				</div>
+				<div class="col sm-4">
+					{{ form_row(formNearmiss.responsable) }}
+				</div>
+			</div>
+			<div class="row g-4">
+				<div class="col sm-8">
+					{{ form_row(formNearmiss.action_possible01) }}
+				</div>
+				<div class="col sm-4">
+					{{ form_row(formNearmiss.responsable01) }}
+				</div>
+			</div>
+			<div class="row g-4">
+				<div class="col sm-8">
+					{{ form_row(formNearmiss.action_possible02) }}
+				</div>
+				<div class="col sm-4">
+					{{ form_row(formNearmiss.responsable02) }}
+				</div>
+			</div>
+			<div>
+				{{ form_row(formNearmiss.imageFile) }}
+			</div>
+			<div class="d-grid gap-2">
+				<input type="submit" value="{{ submitbuttomtext }}" class="btn btn-primary" formnovalidate>
+			</div>
+			{{form_end(formNearmiss)}}
+		</div>
+	</div>
+</div>

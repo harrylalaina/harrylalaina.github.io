@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Ajouter near miss' %}
+
+{% block body %}
+	<div class="row ">
+		<div class="py-5 text-center mt-2">
+			<h2>IMPERIAL TOBACCO - FICHE DE RAPPORT D'INCIDENT ou NEAR MISS</h2>
+		</div>
+
+		{{ include('layouts/partials/_form.html.twig', {submitbuttomtext: 'Create near miss'}) }}
+	</div>
+{% endblock %}
