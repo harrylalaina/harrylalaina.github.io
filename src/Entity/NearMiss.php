@@ -5,9 +5,7 @@ namespace App\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\NearMissRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -135,6 +133,7 @@ class NearMiss
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="preuve_image", fileNameProperty="preuve")
+     * @Assert\Image(maxSize="8M")
      * 
      * @var File|null
      */
@@ -443,7 +442,7 @@ class NearMiss
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->SetUpdatedAt(new \DateTimeImmutable);
+            $this->setUpdatedAt(new \DateTimeImmutable);
         }
     }
 

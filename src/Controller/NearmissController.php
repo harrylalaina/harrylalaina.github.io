@@ -26,7 +26,7 @@ class NearmissController extends AbstractController
     /**
      * @Route("/", name="app_home", methods="GET")
      */
-    public function index(NearMissRepository $nearMissRepo, EmployeRepository $employeRepo, StatusRepository $statusRepository, NearMissRepository $nearmissRepo, EntityManagerInterface $em): Response
+    public function index(YearRepository $yearRepo, Request $request, NearMissRepository $nearMissRepo, EmployeRepository $employeRepo, StatusRepository $statusRepository, NearMissRepository $nearmissRepo, EntityManagerInterface $em): Response
     {
 
         $date = new DateTimeImmutable();
@@ -34,16 +34,13 @@ class NearmissController extends AbstractController
         $newDate = date('F', strtotime("$d + 4 month"));
         //$date = $newDate;
 
-        $nearmissInterval = $nearMissRepo->selectInterval("2021-11-01", "2021-11-30");
+        //$nearmissInterval = $nearMissRepo->selectInterval("2021-11-01", "2021-11-30");
 
         $nearmiss = $nearMissRepo->findBy([], ['createdAt' => 'DESC']);
-        foreach ($nearmiss as $value) {
-            $d1 = $value->getClosedAt();
-            //$interval = date_diff($date, $d1);
-            //dd($interval, $value);
-        }
 
         $collectionNear = $nearmissRepo->traitementClosetAt($d);
+
+        $year = $yearRepo->findBy([]);
 
         $status = $statusRepository->findOneBy(['typeStatus' => 'canceled']);
 
@@ -53,6 +50,8 @@ class NearmissController extends AbstractController
                 $em->flush();
             }
         }
+
+        $page = (int)$request->query->get("page", 1);
 
         return $this->render('nearmiss/index.html.twig', compact('nearmiss', 'collectionNear'));
     }
