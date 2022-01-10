@@ -88,7 +88,7 @@ class NearMissRepository extends ServiceEntityRepository
     public function traitementClosetAt($from)
     {
         $query = $this->createQueryBuilder('n')
-            ->where('SUBSTRING(n.closedAt,1,10) = :from')
+            ->where('n.closedAt < :from')
             ->setParameter(':from', $from);
         return $query->getQuery()->getResult();
     }

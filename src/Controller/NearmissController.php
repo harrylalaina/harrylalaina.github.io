@@ -29,16 +29,19 @@ class NearmissController extends AbstractController
     public function index(YearRepository $yearRepo, Request $request, NearMissRepository $nearMissRepo, EmployeRepository $employeRepo, StatusRepository $statusRepository, NearMissRepository $nearmissRepo, EntityManagerInterface $em): Response
     {
 
+        $status2 = "en attente";
+        $status1 = "non traité";
         $date = new DateTimeImmutable();
         $d = $date->format('Y-m-j');
-        $newDate = date('F', strtotime("$d + 4 month"));
+        //$newDate = date('F', strtotime("$d + 4 month"));
         //$date = $newDate;
 
         //$nearmissInterval = $nearMissRepo->selectInterval("2021-11-01", "2021-11-30");
 
         $nearmiss = $nearMissRepo->findBy([], ['createdAt' => 'DESC']);
 
-        $collectionNear = $nearmissRepo->traitementClosetAt($d);
+        $collectionNear = $nearmissRepo->traitementClosetAt($date);
+        //dd($collectionNear, $date);
 
         $year = $yearRepo->findBy([]);
 
@@ -51,7 +54,7 @@ class NearmissController extends AbstractController
             }
         }
 
-        $page = (int)$request->query->get("page", 1);
+        //$page = (int)$request->query->get("page", 1);
 
         return $this->render('nearmiss/index.html.twig', compact('nearmiss', 'collectionNear'));
     }
