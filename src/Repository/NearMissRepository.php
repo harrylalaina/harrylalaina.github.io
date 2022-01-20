@@ -23,7 +23,7 @@ class NearMissRepository extends ServiceEntityRepository
     /**
      * return nombre de nearmiss par semaine
      */
-    public function countByDate()
+    public function countByDate($id)
     {
         //$query = $this->getEntityManager()->createQuery("
         //    SELECT SUBSTRING('n.created_at', 1, 10) as dateNearmiss,
@@ -33,21 +33,23 @@ class NearMissRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('n')
             ->select("n.week as dateNearmiss, COUNT(n) as count")
-            //->select('COUNT(n) as count')
-            ->groupBy('dateNearmiss');
+            ->where('n.year = :id')
+            ->groupBy('dateNearmiss')
+            ->setParameter(':id', $id);
         return $query->getQuery()->getResult();
     }
 
     /**
      * return nombre de near miss par Employe
      */
-    public function countNearmissEmploye()
+    public function countNearmissEmploye($id)
     {
         $query = $this->getEntityManager()->createQuery("
             SELECT em.name as nomEmploye, COUNT(n) as count FROM App\Entity\NearMiss n
-            JOIN App\Entity\Employe em WHERE em.id = n.employe
+            JOIN App\Entity\Employe em WHERE em.id = n.employe AND n.year = :id
             GROUP BY nomEmploye
-        ");
+        ")
+            ->setParameter(':id', $id);
         return $query->getResult();
     }
 
@@ -61,6 +63,9 @@ class NearMissRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    /**
+     * Pour la pagination 
+     */
     public function countNearmiss()
     {
         $query = $this->createQueryBuilder('near_miss');
@@ -85,11 +90,54 @@ class NearMissRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    /**
+     * Return time of traitment of nearmiss
+     */
     public function traitementClosetAt($from)
     {
         $query = $this->createQueryBuilder('n')
             ->where('n.closedAt < :from')
             ->setParameter(':from', $from);
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Return nearmiss per year
+     */
+    public function cycleNearmiss($id)
+    {
+        $query = $this->createQueryBuilder('n')
+            ->where('n.year = :id')
+            ->orderBy('n.createdAt', 'DESC')
+            ->setParameter(':id', $id);
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Recherche par mot cle
+     */
+    public function searchFullText($mots = null, $employe = null, $categorie = null, $year = null)
+    {
+        $query = $this->createQueryBuilder('n');
+        if ($mots != null) {
+            $query->andwhere('MATCH_AGAINST(n.titre, n.description) AGAINST (:mots boolean)>0')
+                ->setParameter('mots', $mots);
+        }
+        if ($employe != null) {
+            $query->leftJoin('n.employe', 'em')
+                ->andwhere('em.id = :id')
+                ->setParameter('id', $employe);
+        }
+        if ($categorie != null) {
+            $query->leftJoin('n.categorie', 'cat')
+                ->andWhere('cat.id = :id1')
+                ->setParameter('id1', $categorie);
+        }
+        if ($year != null) {
+            $query->leftJoin('n.year', 'y')
+                ->andWhere('y.id = :id2')
+                ->setParameter('id2', $year);
+        }
         return $query->getQuery()->getResult();
     }
 }

@@ -8,12 +8,14 @@ use DateTimeImmutable;
 use App\Entity\Categorie;
 use App\Entity\Year;
 use App\Form\CategorieType;
+use App\Form\HistoNearmissType;
 use App\Form\YearType;
 use App\Repository\UserRepository;
 use App\Repository\EmployeRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\NearMissRepository;
 use App\Repository\TraitementRepository;
+use App\Repository\YearRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +32,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="control", methods={"GET"})
      */
-    public function index(UserRepository $userRepo, EmployeRepository $employeRepo, NearMissRepository $nearmissRepo, ChartBuilderInterface $chartBuilder): Response
+    public function index(YearRepository $yearRepo, UserRepository $userRepo, EmployeRepository $employeRepo, NearMissRepository $nearmissRepo, ChartBuilderInterface $chartBuilder): Response
     {
         $nearmiss = $nearmissRepo->findBy([]);
         $user = $userRepo->findBy([]);
@@ -45,7 +47,14 @@ class AdminController extends AbstractController
         $date = new DateTimeImmutable();
         $d = $date->format('W');
 
-        $nearmissEm = $nearmissRepo->countNearmissEmploye();
+        $year = $yearRepo->findBy([]);
+
+        foreach ($year as $value) {
+            if ($date > $value->getDebut() && $date < $value->getFin()) {
+                $nearmissEm = $nearmissRepo->countNearmissEmploye($value->getId());
+            }
+        }
+
         foreach ($nearmissEm as $nearmisses) {
             foreach ($nearmisses as $i => $value) {
                 if ($i == "nomEmploye") {
@@ -59,7 +68,11 @@ class AdminController extends AbstractController
 
         //$nearmiss = $nearmissRepo->nearmissByWeek($d - 3);
 
-        $nearmiss2 = $nearmissRepo->countByDate();
+        foreach ($year as $value) {
+            if ($date > $value->getDebut() && $date < $value->getFin()) {
+                $nearmiss2 = $nearmissRepo->countByDate($value->getId());
+            }
+        }
         foreach ($nearmiss2 as $nearmisses) {
             foreach ($nearmisses as $i => $value) {
                 if ($i == "dateNearmiss") {
@@ -162,7 +175,7 @@ class AdminController extends AbstractController
         ]);
 
 
-        return $this->render('admin/index.html.twig', compact('user', 'employe', 'nearmiss', 'chart', 'chartBar'));
+        return $this->render('admin/index.html.twig', compact('user', 'employe', 'nearmiss', 'chart', 'chartBar', 'year'));
     }
 
     /**
@@ -366,6 +379,31 @@ class AdminController extends AbstractController
         }
         return $this->render('admin/yearAdd.html.twig', [
             'formYear' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/recherche", name="nearmiss_recherche", methods={"GET","POST"})
+     */
+    public function search(NearMissRepository $nearmissRepo, Request $request): Response
+    {
+        $nearmiss = $nearmissRepo->findBy([]);
+
+        $form = $this->createForm(HistoNearmissType::class);
+
+        $search = $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $nearmiss = $nearmissRepo->searchFullText(
+                $search->get('mots')->getData(),
+                $search->get('employe')->getData(),
+                $search->get('categorie')->getData(),
+                $search->get('year')->getData()
+            );
+        }
+        return $this->render('admin/historique.html.twig', [
+            'nearmiss' => $nearmiss,
+            'form' => $form->createView()
         ]);
     }
 }

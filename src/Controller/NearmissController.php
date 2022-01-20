@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\NearMiss;
 use App\Entity\Traitement;
+use App\Entity\Year;
 use App\Form\NearmissType;
 use App\Repository\CategorieRepository;
 use App\Repository\EmployeRepository;
@@ -16,6 +17,7 @@ use App\Repository\UserRepository;
 use App\Repository\YearRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,8 +31,6 @@ class NearmissController extends AbstractController
     public function index(YearRepository $yearRepo, Request $request, NearMissRepository $nearMissRepo, EmployeRepository $employeRepo, StatusRepository $statusRepository, NearMissRepository $nearmissRepo, EntityManagerInterface $em): Response
     {
 
-        $status2 = "en attente";
-        $status1 = "non traité";
         $date = new DateTimeImmutable();
         $d = $date->format('Y-m-j');
         //$newDate = date('F', strtotime("$d + 4 month"));
@@ -38,12 +38,18 @@ class NearmissController extends AbstractController
 
         //$nearmissInterval = $nearMissRepo->selectInterval("2021-11-01", "2021-11-30");
 
-        $nearmiss = $nearMissRepo->findBy([], ['createdAt' => 'DESC']);
+        //$nearmiss = $nearMissRepo->findBy([], ['createdAt' => 'DESC']);
 
         $collectionNear = $nearmissRepo->traitementClosetAt($date);
         //dd($collectionNear, $date);
 
         $year = $yearRepo->findBy([]);
+
+        foreach ($year as $value) {
+            if ($date > $value->getDebut() && $date < $value->getFin()) {
+                $nearmiss = $nearMissRepo->cycleNearmiss($value->getId());
+            }
+        }
 
         $status = $statusRepository->findOneBy(['typeStatus' => 'canceled']);
 
@@ -56,17 +62,26 @@ class NearmissController extends AbstractController
 
         //$page = (int)$request->query->get("page", 1);
 
-        return $this->render('nearmiss/index.html.twig', compact('nearmiss', 'collectionNear'));
+        return $this->render('nearmiss/index.html.twig', compact('nearmiss', 'collectionNear', 'year'));
     }
 
     /**
      * @Route("/traitement", name="app_traitement", methods="GET")
      */
-    public function traitementNearmiss(NearMissRepository $nearMissRepo, EmployeRepository $employeRepo): Response
+    public function traitementNearmiss(NearMissRepository $nearMissRepo, EmployeRepository $employeRepo, YearRepository $yearRepo): Response
     {
-        $nearmiss = $nearMissRepo->findBy([], ['createdAt' => 'DESC']);
+        //$nearmiss = $nearMissRepo->findBy([], ['createdAt' => 'DESC']);
+        $date = new DateTimeImmutable();
 
-        return $this->render('nearmiss/nearmissListTraitement.html.twig', compact('nearmiss'));
+        $year = $yearRepo->findBy([]);
+
+        foreach ($year as $value) {
+            if ($date > $value->getDebut() && $date < $value->getFin()) {
+                $nearmiss = $nearMissRepo->cycleNearmiss($value->getId());
+            }
+        }
+
+        return $this->render('nearmiss/nearmissListTraitement.html.twig', compact('nearmiss', 'year'));
     }
 
     /**
@@ -304,19 +319,37 @@ class NearmissController extends AbstractController
     /**
      * @Route("admin/nearmiss_list", name="admin_nearmiss_list", methods={"GET"})
      */
-    public function nearmissList(NearMissRepository $nearmissRepo): Response
+    public function nearmissList(NearMissRepository $nearMissRepo, YearRepository $yearRepo): Response
     {
-        $nearmiss = $nearmissRepo->findBy([], ['createdAt' => 'DESC']);
-        return $this->render('nearmiss/nearmissList.html.twig', compact('nearmiss'));
+        //$nearmiss = $nearmissRepo->findBy([], ['createdAt' => 'DESC']);
+        $date = new DateTimeImmutable();
+
+        $year = $yearRepo->findBy([]);
+
+        foreach ($year as $value) {
+            if ($date > $value->getDebut() && $date < $value->getFin()) {
+                $nearmiss = $nearMissRepo->cycleNearmiss($value->getId());
+            }
+        }
+        return $this->render('nearmiss/nearmissList.html.twig', compact('nearmiss', 'year'));
     }
 
     /**
      * @Route("admin/nearmiss/suivi", name="admin_nearmiss_suivi", methods={"GET"})
      */
-    public function suiviNearmiss(NearMissRepository $nearmissRepo): Response
+    public function suiviNearmiss(NearMissRepository $nearMissRepo, YearRepository $yearRepo): Response
     {
-        $nearmiss = $nearmissRepo->findBy([], ['createdAt' => 'DESC']);
-        return $this->render('nearmiss/suiviNearmiss.html.twig', compact('nearmiss'));
+        //$nearmiss = $nearmissRepo->findBy([], ['createdAt' => 'DESC']);
+        $date = new DateTimeImmutable();
+
+        $year = $yearRepo->findBy([]);
+
+        foreach ($year as $value) {
+            if ($date > $value->getDebut() && $date < $value->getFin()) {
+                $nearmiss = $nearMissRepo->cycleNearmiss($value->getId());
+            }
+        }
+        return $this->render('nearmiss/suiviNearmiss.html.twig', compact('nearmiss', 'year'));
     }
 
     /**
