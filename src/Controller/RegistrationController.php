@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register", methods={"GET","POST"})
+     * @Route("admin/register", name="app_register", methods={"GET","POST"})
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
