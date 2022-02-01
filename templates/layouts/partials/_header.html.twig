@@ -19,16 +19,6 @@
 							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon"></span>
 							</button>
-							<a
-								class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
-								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-									<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
-									<path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-								</svg>
-								<span class="icon-badge">3</span>
-							</a>
-
 						</div>
 
 						<div class="app-utility-item app-user-dropdown dropdown">
@@ -183,6 +173,33 @@
 						</div>
 					</li>
 					<!--//nav-item-->
+					<li class="nav-item has-submenu">
+						<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-3">
+							<span class="nav-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-activity" viewbox="0 0 16 16">
+									<path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+								</svg>
+							</span>
+							<span class="nav-link-text">Action</span>
+							<span class="submenu-arrow">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+								</svg>
+							</span>
+							<!--//submenu-arrow-->
+						</a>
+						<!--//nav-link-->
+						<div id="submenu-3" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
+							<ul class="submenu-list list-unstyled">
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_categorie_add') }}">Add categorie</a>
+								</li>
+								<li class="submenu-item">
+									<a class="submenu-link" href="{{ path('admin_year_add') }}">Add year</a>
+								</li>
+							</ul>
+						</div>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('admin_nearmiss_recherche') }}">
 							<span class="nav-icon">

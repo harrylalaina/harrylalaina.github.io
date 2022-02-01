@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class HistoNearmissType extends AbstractType
 {
@@ -18,25 +17,25 @@ class HistoNearmissType extends AbstractType
     {
         $builder
             ->add('mots', SearchType::class, [
-                'label' => false,
+                'label' => "Mot à chercher",
                 'required' => false
             ])
             ->add('employe', EntityType::class, [
                 'class' => Employe::class,
                 'choice_label' => 'name',
-                'label' => false,
+                'label' => "Employe",
                 'required' => false
             ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'designation',
-                'label' => false,
+                'label' => "Catégorie",
                 'required' => false
             ])
             ->add('year', EntityType::class, [
                 'class' => Year::class,
                 'choice_label' => 'libelle',
-                'label' => false,
+                'label' => "Année",
                 'required' => false
             ]);
     }
